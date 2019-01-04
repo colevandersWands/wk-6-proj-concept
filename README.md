@@ -5,3 +5,5 @@ learning objectives:
 * in-place navigation
 * ui-first development
 * ...
+
+would be a better project with fewer stories

@@ -70,22 +70,27 @@ console.log('# 3: components')
         {name: '{id:2, title:"ip", body:"pi"}', args: [{id:2, title: 'ip', body:"pi"}]},
       ]
     function read_one_component(todo) {
-      const title = document.createTextNode(todo.id+': '+todo.title);
-      const title_input = input_component( 'new-title', 'new title');
-      const body = document.createTextNode(todo.body);
-      const body_input = input_component( 'new-body', 'new body');
-      const update_button = button_component( 'update', ()=>{update_handler(todo.id)});
-      const delete_button = button_component( 'delete', ()=>{delete_handler(todo.id)});      
-      
-      const component_div = document.createElement('div');
-      component_div.appendChild(title);
-      component_div.appendChild(title_input);
-      component_div.appendChild(body);
-      component_div.appendChild(body_input);
-      component_div.appendChild(update_button);
-      component_div.appendChild(delete_button);
+      if (todo.err) {
+        const err_mssg = document.createTextNode(todo.err);
+        render(err_mssg);
+      } else {
+        const title = document.createTextNode(todo.id+': '+todo.title);
+        const title_input = input_component( 'new-title', 'new title');
+        const body = document.createTextNode(todo.body);
+        const body_input = input_component( 'new-body', 'new body');
+        const update_button = button_component( 'update', ()=>{update_handler(todo.id)});
+        const delete_button = button_component( 'delete', ()=>{delete_handler(todo.id)});      
+        
+        const component_div = document.createElement('div');
+        component_div.appendChild(title);
+        component_div.appendChild(title_input);
+        component_div.appendChild(body);
+        component_div.appendChild(body_input);
+        component_div.appendChild(update_button);
+        component_div.appendChild(delete_button);
 
-      return component_div;
+        return component_div;
+      }
     }
     test_dom_component(read_one_component, read_one_comp_tests);
 
